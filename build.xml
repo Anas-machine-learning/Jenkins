@@ -11,7 +11,7 @@
 
     <!-- Retrieve an unpackaged set of metadata from your org -->
     <!-- The file unpackaged/package.xml lists what is to be retrieved -->
-    <target name="retrieveUnpackaged">
+    <target name="retrieve">
       <mkdir dir="unpackaged"/>
       <!-- Retrieve the contents into another directory -->
       <sf:retrieve username="${sf.dev4username}" password="${sf.dev4password}" serverurl="${sf.sandboxurl}" maxPoll="${sf.maxPoll}" retrieveTarget="unpackaged" unpackaged="unpackaged/package.xml"/>
@@ -29,7 +29,7 @@
     </target>
 
     <!-- Deploy the unpackaged set of metadata retrieved with retrieveUnpackaged and run tests in this organization's namespace only-->
-    <target name="deployUnpackaged">
+    <target name="deploy" depends="retrieve">
       <sf:deploy username="${sf.devusername}" password="${sf.devpassword}" serverurl="${sf.produrl}" maxPoll="${sf.maxPoll}" deployRoot="unpackaged" rollbackOnError="true"/>
     </target>
     <target name="deployPkg">
